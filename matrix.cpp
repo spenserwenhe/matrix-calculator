@@ -14,16 +14,23 @@ Matrix::Matrix(int m, int n) {
             mat[row].push_back(0);
         }
     }
+    std::cout<<"Type your entries: "<<std::endl;
+    for (int row = 0; row < m; ++row) {
+        for (int col = 0; col < n; ++col) {
+            std::cin>>mat[row][col];
+        }
+    }
 }
 
 void Matrix::printMatrix() {
+    std::cout<<"______________________________"<<std::endl;
     for (unsigned row = 0; row < mat.size(); ++row) {
         for (unsigned col = 0; col < mat[row].size(); ++col) {
             if (col == mat[row].size() - 1) {
                 std::cout<<mat[row][col]<<std::endl;
             }
             else {
-                std::cout<<mat[row][col]<<"   ";
+                std::cout<<mat[row][col]<<"    ";
             }
         }
     }

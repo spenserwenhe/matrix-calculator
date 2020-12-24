@@ -1,0 +1,55 @@
+#include "matrix.h"
+
+#include <iostream>
+
+Matrix::Matrix() {
+
+}
+
+Matrix::Matrix(int m, int n) {
+    for (int row = 0; row < m; ++row) {
+        std::vector<double> v;
+        mat.push_back(v);
+        for (int col = 0; col < n; ++col) {
+            mat[row].push_back(0);
+        }
+    }
+}
+
+void Matrix::printMatrix() {
+    for (unsigned row = 0; row < mat.size(); ++row) {
+        for (unsigned col = 0; col < mat[row].size(); ++col) {
+            if (col == mat[row].size() - 1) {
+                std::cout<<mat[row][col]<<std::endl;
+            }
+            else {
+                std::cout<<mat[row][col]<<"   ";
+            }
+        }
+    }
+}
+/*
+std::vector<std::vector<int>> Matrix::getMatrix() {
+    return mat;
+}
+*/
+
+void Matrix::rowSwitch(int rowA, int rowB) {
+
+}
+
+void Matrix::rowScale(int row, double scale) {
+
+}
+
+void Matrix::rowAdd(int rowDest, int rowSoure, double scale) {
+
+}
+
+/*std::vector<std::vector<double>> findEchelon() {
+
+}
+
+std::vector<std::vector<double>> rref() {
+
+}*/

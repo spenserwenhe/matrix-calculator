@@ -42,7 +42,11 @@ std::vector<std::vector<int>> Matrix::getMatrix() {
 */
 
 void Matrix::rowSwitch(int rowA, int rowB) {
-
+    for (unsigned i = 0; i < mat[rowA - 1].size(); ++i) {
+        double temp = mat[rowA - 1][i];
+        mat[rowA - 1][i] = mat[rowB - 1][i];
+        mat[rowB - 1][i] = temp;
+    }
 }
 
 void Matrix::rowScale(int row, double scale) {

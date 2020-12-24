@@ -42,10 +42,10 @@ std::vector<std::vector<int>> Matrix::getMatrix() {
 */
 
 void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
-    if (rowA - 1 > mat.size() ||
-        rowA - 1 < mat.size() ||
-        rowB - 1 > mat.size() ||
-        rowB - 1 < mat.size()) {
+    if (rowA > mat.size() ||
+                rowA <= 0 ||
+        rowB > mat.size() ||
+                rowB <= 0) {
             std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
             return;
         }

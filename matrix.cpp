@@ -36,65 +36,94 @@ void Matrix::printMatrix() {
     }
 }
 
-std::vector<std::vector<int> > Matrix::getMatrix() {
+std::vector<std::vector<double> > Matrix::getMatrix() {
     return mat;
 }
 
 void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
-    if (rowA > mat.size() || rowA <= 0 ||
-        rowB > mat.size() || rowB <= 0) {
+    if (rowA >= mat.size() || rowA < 0 ||
+        rowB >= mat.size() || rowB < 0) {
             std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
             return;
     }
-    for (unsigned i = 0; i < mat[rowA - 1].size(); ++i) {
-        double temp = mat[rowA - 1][i];
-        mat[rowA - 1][i] = mat[rowB - 1][i];
-        mat[rowB - 1][i] = temp;
+    for (unsigned i = 0; i < mat[rowA].size(); ++i) {
+        double temp = mat[rowA][i];
+        mat[rowA][i] = mat[rowB][i];
+        mat[rowB][i] = temp;
     }
 }
 
 void Matrix::rowScale(unsigned row, double scale) {
-    if ( row > mat.size() || row <= 0) {
+    if ( row >= mat.size() || row < 0) {
         std::cout<<"Invalid operation. Please enter a valid row."<<std::endl;
         return;
     }
     for (int i = 0; i < mat[row].size(); ++i) {
-        mat[row - 1][i] = mat[row - 1][i] * scale;
+        mat[row][i] = mat[row][i] * scale;
     }
 }
 
 void Matrix::rowAdd(unsigned rowDest, unsigned rowSource, double scale) {
-    if (rowDest > mat.size() || rowDest <= 0 ||
-        rowSource > mat.size() || rowSource <= 0) {
+    if (rowDest >= mat.size() || rowDest < 0 ||
+        rowSource >= mat.size() || rowSource < 0) {
             std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
             return;
     }
     for (unsigned i = 0; i < mat[rowDest].size(); ++i) {
-        mat[rowDest - 1][i] += mat[rowSource - 1][i] * scale;
+        mat[rowDest][i] += mat[rowSource][i] * scale;
     }
 }
 
-std::vector<std::vector<double> > findEchelon() {
-    /*
-    1) find leftmost nonzero column, pivot position at the top.
-    2) Find nonzero entry in the pivot column as a pivot. If necessary,
-        interchange rows to move this entry into the pivot position
-    3) Use row addition operations to create zeros in all positions
-        below pivot.
-    4) 
-    */
-   unsigned startRow = 0;
-   for (unsigned col = 0; col < mat[0].size(); ++col) {
-       if (nzCol(col) == true) {
-           startRow = col;
-       }
-   }
+/*
+1) Swap the 1st row with a lower one so a leftmost nonzero entry is in the
+    1st row.
+2) Scale the 1st row so that its first nonzero entry is equal to 1.
+3) Use row replacement so all entries below this 1 are 0.
+4) Swap the 2nd row with a lower one so that the leftmost nonzero entry is
+    in the 2nd row, etc.
+*/
+void Matrix::findEchelon() {
+    if (Matrix::zeroMatCheck() == 1) {
+        return;
+    }
+    int rowCounter = 0;
+    for (unsigned col = 0; col < mat[0].size(); ++col) {
+        if (Matrix::zeroCol(col) == 0) {
+
+            /*Swap the 1st row with a lower one so a leftmost nonzero entry
+            is in the first row. */
+            if (mat[rowCounter][col] == 0 && rowCounter < mat.size() - 1) {
+                for (int i = rowCounter + 1; i < mat.size(); ++i) {
+                    if (mat[i][col] != 0) {
+                        Matrix::rowSwitch(rowCounter, i);
+                        break;
+                    }
+                }
+            }
+
+            //Make pivot entry a 1 and entries below 0
+            Matrix::rowScale(rowCounter, 1 / mat[rowCounter][col]);
+            if (rowCounter < mat.size() - 1) {
+                for (int i = rowCounter + 1; i < mat.size(); ++i) {
+                    if (mat[i][col] != 0) {
+                        if (mat[i][col] == mat[rowCounter][col]) {
+                            Matrix::rowAdd(i, rowCounter, -1);
+                        }
+                        else if (mat[i][col] > mat[rowCounter][col]) {
+                            Matrix::rowAdd(i, rowCounter, (-1) * mat[i][col]);
+                        }
+                        else {
+                            Matrix::rowAdd(i, rowCounter, mat[i][col]);
+                        }
+                    }
+                }
+            }
+        }
+        ++rowCounter;
+    }
 }
 
-bool Matrix::nzCol(unsigned col) {
-    if (col > mat[0].size() || col <= 0) {
-        return -1;
-    }
+bool Matrix::zeroCol(unsigned col) {
     for (unsigned i = 0; i < mat.size(); ++i) {
         if (mat[i][col] != 0) {
             return 0;
@@ -114,6 +143,6 @@ bool Matrix::zeroMatCheck() {
    return 1;
 }
 
-/*std::vector<std::vector<double>> rref() {
-
+/*std::vector<std::vector<double>> Matrix::rref() {
+    Matrix::findEchelon();
 }*/

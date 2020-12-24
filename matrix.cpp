@@ -153,4 +153,22 @@ bool Matrix::zeroMatCheck() {
 
 /*std::vector<std::vector<double>> Matrix::rref() {
     Matrix::findEchelon();
+    unsigned rowStart = 0;
+    for (unsigned col = 0; col < mat[0].size(); ++col) {
+        if (Matrix::zeroCol(col) == 0) {
+            for (unsigned row = mat.size() - 1; row >= 0; --row) {
+                if (mat[row][col] == 1) {
+                    rowStart = row;
+                }
+            }
+        }
+    }
 }*/
+
+double Matrix::getEntry(unsigned row, unsigned col) {
+    return mat[row][col];
+}
+
+void Matrix::setEntry(unsigned row, unsigned col, double num) {
+    mat[row][col] = num;
+}

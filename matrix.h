@@ -30,4 +30,8 @@ class Matrix {
         //Helper functions
         bool zeroCol(unsigned col);   //Returns 1 if it's a zero column, 0 if not
         bool zeroMatCheck();        //Returns 1 if it's a zero matrix, 0 if not
+
+        //Testing functions
+        double getEntry(unsigned row, unsigned col);
+        void setEntry(unsigned row, unsigned col, double num);
 };

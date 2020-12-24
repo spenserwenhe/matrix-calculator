@@ -28,5 +28,6 @@ class Matrix {
         std::vector<std::vector<double> > rref();
 
         //Helper functions
-        bool nzCol(unsigned col);
+        bool nzCol(unsigned col);   //Returns 1 if it's a nonzero column, 0 if not
+        bool zeroMatCheck();        //Returns 1 if it's a zero matrix, 0 if not
 };

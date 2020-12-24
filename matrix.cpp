@@ -74,7 +74,7 @@ void Matrix::rowAdd(unsigned rowDest, unsigned rowSource, double scale) {
     }
 }
 
-std::vector<std::vector<double>> findEchelon() {
+std::vector<std::vector<double> > findEchelon() {
     /*
     1) find leftmost nonzero column, pivot position at the top.
     2) Find nonzero entry in the pivot column as a pivot. If necessary,
@@ -82,9 +82,13 @@ std::vector<std::vector<double>> findEchelon() {
     3) Use row addition operations to create zeros in all positions
         below pivot.
     4) 
-    
-
     */
+   unsigned startRow = 0;
+   for (unsigned col = 0; col < mat[0].size(); ++col) {
+       if (nzCol(col) == true) {
+           startRow = col;
+       }
+   }
 }
 
 bool Matrix::nzCol(unsigned col) {
@@ -97,6 +101,17 @@ bool Matrix::nzCol(unsigned col) {
         }
     }
     return 1;
+}
+
+bool Matrix::zeroMatCheck() {
+   for (unsigned row = 0; row < mat.size(); ++row) {
+       for (unsigned col = 0; col < mat[row].size(); ++col) {
+           if (mat[row][col] != 0) {
+               return 0;
+           }
+       }
+   }
+   return 1;
 }
 
 /*std::vector<std::vector<double>> rref() {

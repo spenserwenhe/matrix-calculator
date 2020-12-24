@@ -41,7 +41,7 @@ std::vector<std::vector<int>> Matrix::getMatrix() {
 }
 */
 
-void Matrix::rowSwitch(int rowA, int rowB) {
+void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
     if (rowA - 1 > mat.size() ||
         rowA - 1 < mat.size() ||
         rowB - 1 > mat.size() ||
@@ -56,8 +56,14 @@ void Matrix::rowSwitch(int rowA, int rowB) {
     }
 }
 
-void Matrix::rowScale(int row, double scale) {
-
+void Matrix::rowScale(unsigned row, double scale) {
+    if ( row > mat.size() || row <= 0) {
+        std::cout<<"Invalid operation. Please enter a valid row."<<std::endl;
+        return;
+    }
+    for (int i = 0; i < mat[row].size(); ++i) {
+        mat[row - 1][i] = mat[row - 1][i] * scale;
+    }
 }
 
 void Matrix::rowAdd(int rowDest, int rowSoure, double scale) {

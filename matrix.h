@@ -19,8 +19,8 @@ class Matrix {
         std::vector<std::vector<double> > getMatrix();
 
         //Elementary row operations
-        void rowSwitch(int rowA, int rowB);      //Switches two rows
-        void rowScale(int row, double scale);       //scales a row
+        void rowSwitch(unsigned rowA, unsigned rowB);      //Switches two rows
+        void rowScale(unsigned row, double scale);       //scales a row
         void rowAdd(int rowDest, int rowSource, double scale);       //adds a scaled row to another row
 
         //Finds an echelon form and an RREF of the matrix

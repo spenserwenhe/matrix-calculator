@@ -35,11 +35,10 @@ void Matrix::printMatrix() {
         }
     }
 }
-/*
-std::vector<std::vector<int>> Matrix::getMatrix() {
+
+std::vector<std::vector<int> > Matrix::getMatrix() {
     return mat;
 }
-*/
 
 void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
     if (rowA > mat.size() || rowA <= 0 ||
@@ -75,10 +74,31 @@ void Matrix::rowAdd(unsigned rowDest, unsigned rowSource, double scale) {
     }
 }
 
-/*std::vector<std::vector<double>> findEchelon() {
+std::vector<std::vector<double>> findEchelon() {
+    /*
+    1) find leftmost nonzero column, pivot position at the top.
+    2) Find nonzero entry in the pivot column as a pivot. If necessary,
+        interchange rows to move this entry into the pivot position
+    3) Use row addition operations to create zeros in all positions
+        below pivot.
+    4) 
+    
 
+    */
 }
 
-std::vector<std::vector<double>> rref() {
+bool Matrix::nzCol(unsigned col) {
+    if (col > mat[0].size() || col <= 0) {
+        return -1;
+    }
+    for (unsigned i = 0; i < mat.size(); ++i) {
+        if (mat[i][col] != 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+/*std::vector<std::vector<double>> rref() {
 
 }*/

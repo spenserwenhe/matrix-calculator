@@ -26,4 +26,7 @@ class Matrix {
         //Finds an echelon form and an RREF of the matrix
         std::vector<std::vector<double> > findEchelon();
         std::vector<std::vector<double> > rref();
+
+        //Helper functions
+        bool nzCol(unsigned col);
 };

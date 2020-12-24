@@ -91,7 +91,6 @@ void Matrix::findEchelon() {
         return;
     }
     int rowCounter = 0;
-    std::cout<<mat[0].size()<<std::endl;
     for (unsigned col = 0; col < mat[0].size(); ++col) {
         if (rowCounter >= mat.size()) {
             break;
@@ -129,9 +128,7 @@ void Matrix::findEchelon() {
             }
             ++rowCounter;
         }
-        std::cout<<"check"<<std::endl;
     }
-    std::cout<<"check2"<<std::endl;
 }
 
 bool Matrix::zeroCol(unsigned col) {

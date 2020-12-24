@@ -3,7 +3,13 @@
 #include <iostream>
 
 int main() {
-    Matrix newMat = Matrix(3, 4);
+    unsigned row = 0;
+    unsigned col = 0;
+    std::cout<<"Enter dimensions [row, col]: "<<std::endl;
+    std::cin>>row>>col;
+    Matrix newMat = Matrix(row, col);
+    newMat.printMatrix();
+    newMat.findEchelon();
     newMat.printMatrix();
     return 0;
 }

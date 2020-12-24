@@ -42,6 +42,13 @@ std::vector<std::vector<int>> Matrix::getMatrix() {
 */
 
 void Matrix::rowSwitch(int rowA, int rowB) {
+    if (rowA - 1 > mat.size() ||
+        rowA - 1 < mat.size() ||
+        rowB - 1 > mat.size() ||
+        rowB - 1 < mat.size()) {
+            std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
+            return;
+        }
     for (unsigned i = 0; i < mat[rowA - 1].size(); ++i) {
         double temp = mat[rowA - 1][i];
         mat[rowA - 1][i] = mat[rowB - 1][i];

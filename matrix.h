@@ -21,7 +21,7 @@ class Matrix {
         //Elementary row operations
         void rowSwitch(unsigned rowA, unsigned rowB);      //Switches two rows
         void rowScale(unsigned row, double scale);       //scales a row
-        void rowAdd(int rowDest, int rowSource, double scale);       //adds a scaled row to another row
+        void rowAdd(unsigned rowDest, unsigned rowSource, double scale);       //adds a scaled row to another row
 
         //Finds an echelon form and an RREF of the matrix
         std::vector<std::vector<double> > findEchelon();

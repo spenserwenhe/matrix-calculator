@@ -42,13 +42,11 @@ std::vector<std::vector<int>> Matrix::getMatrix() {
 */
 
 void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
-    if (rowA > mat.size() ||
-                rowA <= 0 ||
-        rowB > mat.size() ||
-                rowB <= 0) {
+    if (rowA > mat.size() || rowA <= 0 ||
+        rowB > mat.size() || rowB <= 0) {
             std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
             return;
-        }
+    }
     for (unsigned i = 0; i < mat[rowA - 1].size(); ++i) {
         double temp = mat[rowA - 1][i];
         mat[rowA - 1][i] = mat[rowB - 1][i];
@@ -66,8 +64,15 @@ void Matrix::rowScale(unsigned row, double scale) {
     }
 }
 
-void Matrix::rowAdd(int rowDest, int rowSoure, double scale) {
-
+void Matrix::rowAdd(unsigned rowDest, unsigned rowSource, double scale) {
+    if (rowDest > mat.size() || rowDest <= 0 ||
+        rowSource > mat.size() || rowSource <= 0) {
+            std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
+            return;
+    }
+    for (unsigned i = 0; i < mat[rowDest].size(); ++i) {
+        mat[rowDest - 1][i] += mat[rowSource - 1][i] * scale;
+    }
 }
 
 /*std::vector<std::vector<double>> findEchelon() {

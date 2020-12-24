@@ -59,7 +59,9 @@ void Matrix::rowScale(unsigned row, double scale) {
         return;
     }
     for (int i = 0; i < mat[row].size(); ++i) {
-        mat[row][i] = mat[row][i] * scale;
+        if (mat[row][i] != 0) {
+            mat[row][i] = mat[row][i] * scale;
+        }
     }
 }
 
@@ -70,7 +72,9 @@ void Matrix::rowAdd(unsigned rowDest, unsigned rowSource, double scale) {
             return;
     }
     for (unsigned i = 0; i < mat[rowDest].size(); ++i) {
-        mat[rowDest][i] += mat[rowSource][i] * scale;
+        if (mat[rowSource][i] != 0) {
+            mat[rowDest][i] += mat[rowSource][i] * scale;
+        }
     }
 }
 
@@ -100,14 +104,20 @@ void Matrix::findEchelon() {
                     }
                 }
             }
-
+            
             //Make pivot entry a 1 and entries below 0
-            Matrix::rowScale(rowCounter, 1 / mat[rowCounter][col]);
+            //Matrix::printMatrix();
+            //std::cout<<1.0<<mat[rowCounter][col]<<std::endl;
+            int scale1 = 1.0 / mat[rowCounter][col];
+            Matrix::rowScale(rowCounter, scale1);
+            //std::cout<<"check 1"<<std::endl;
             if (rowCounter < mat.size() - 1) {
                 for (int i = rowCounter + 1; i < mat.size(); ++i) {
                     if (mat[i][col] != 0) {
                         if (mat[i][col] == mat[rowCounter][col]) {
                             Matrix::rowAdd(i, rowCounter, -1);
+                            //std::cout<<"check 2"<<std::endl;
+                            //Matrix::printMatrix();
                         }
                         else if (mat[i][col] > mat[rowCounter][col]) {
                             Matrix::rowAdd(i, rowCounter, (-1) * mat[i][col]);
@@ -118,8 +128,8 @@ void Matrix::findEchelon() {
                     }
                 }
             }
+            ++rowCounter;
         }
-        ++rowCounter;
     }
 }
 

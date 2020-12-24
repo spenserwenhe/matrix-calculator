@@ -100,16 +100,18 @@ void Matrix::findEchelon() {
                 for (int i = rowCounter + 1; i < mat.size(); ++i) {
                     if (mat[i][col] != 0) {
                         Matrix::rowSwitch(rowCounter, i);
+                        Matrix::printMatrix();
                         break;
                     }
                 }
             }
             
             //Make pivot entry a 1 and entries below 0
-            //Matrix::printMatrix();
+            Matrix::printMatrix();
             //std::cout<<1.0<<mat[rowCounter][col]<<std::endl;
             int scale1 = 1.0 / mat[rowCounter][col];
             Matrix::rowScale(rowCounter, scale1);
+            Matrix::printMatrix();
             //std::cout<<"check 1"<<std::endl;
             if (rowCounter < mat.size() - 1) {
                 for (int i = rowCounter + 1; i < mat.size(); ++i) {
@@ -117,7 +119,7 @@ void Matrix::findEchelon() {
                         if (mat[i][col] == mat[rowCounter][col]) {
                             Matrix::rowAdd(i, rowCounter, -1);
                             //std::cout<<"check 2"<<std::endl;
-                            //Matrix::printMatrix();
+                            Matrix::printMatrix();
                         }
                         else if (mat[i][col] > mat[rowCounter][col]) {
                             Matrix::rowAdd(i, rowCounter, (-1) * mat[i][col]);

@@ -103,7 +103,6 @@ void Matrix::findEchelon() {
                 for (int i = rowCounter + 1; i < mat.size(); ++i) {
                     if (mat[i][col] != 0) {
                         Matrix::rowSwitch(rowCounter, i);
-                        Matrix::printMatrix();
                         break;
                     }
                 }
@@ -112,13 +111,11 @@ void Matrix::findEchelon() {
             //Make pivot entry a 1 and entries below 0
             double scale1 = 1 / mat[rowCounter][col];
             Matrix::rowScale(rowCounter, scale1);
-            Matrix::printMatrix();
             if (rowCounter < mat.size() - 1) {
                 for (int i = rowCounter + 1; i < mat.size(); ++i) {
                     if (mat[i][col] != 0) {
                         if (mat[i][col] == mat[rowCounter][col]) {
                             Matrix::rowAdd(i, rowCounter, -1);
-                            Matrix::printMatrix();
                         }
                          else {
                             Matrix::rowAdd(i, rowCounter, (-1) * mat[i][col]);
@@ -127,6 +124,32 @@ void Matrix::findEchelon() {
                 }
             }
             ++rowCounter;
+        }
+    }
+}
+
+void Matrix::rref() {
+    Matrix::findEchelon();
+    Matrix::printMatrix();
+    for (unsigned col = 0; col < mat[0].size(); ++col) {
+        int rowStart = 0;
+        if (Matrix::zeroCol(col) == 0) {
+            for (int row = mat.size() - 1; row >= 0; --row) {
+                if (mat[row][col] == 1) {
+                    rowStart = row;
+                    break;
+                }
+            }
+            for (int row = rowStart - 1; row >= 0; --row) {
+                if (mat[row][col] != 0) {
+                    if (mat[row][col] == mat[rowStart][col]) {
+                        Matrix::rowAdd(row, rowStart, -1);
+                    }
+                    else {
+                        Matrix::rowAdd(row, rowStart, (-1) * mat[row][col]);
+                    }
+                }
+            }
         }
     }
 }
@@ -150,20 +173,6 @@ bool Matrix::zeroMatCheck() {
    }
    return 1;
 }
-
-/*std::vector<std::vector<double>> Matrix::rref() {
-    Matrix::findEchelon();
-    unsigned rowStart = 0;
-    for (unsigned col = 0; col < mat[0].size(); ++col) {
-        if (Matrix::zeroCol(col) == 0) {
-            for (unsigned row = mat.size() - 1; row >= 0; --row) {
-                if (mat[row][col] == 1) {
-                    rowStart = row;
-                }
-            }
-        }
-    }
-}*/
 
 double Matrix::getEntry(unsigned row, unsigned col) {
     return mat[row][col];

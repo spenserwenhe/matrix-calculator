@@ -14,12 +14,6 @@ Matrix::Matrix(int m, int n) {
             mat[row].push_back(0);
         }
     }
-    std::cout<<"Type your entries: "<<std::endl;
-    for (int row = 0; row < m; ++row) {
-        for (int col = 0; col < n; ++col) {
-            std::cin>>mat[row][col];
-        }
-    }
 }
 
 void Matrix::printMatrix() {

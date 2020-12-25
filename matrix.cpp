@@ -23,7 +23,7 @@ Matrix::Matrix(int m, int n) {
 }
 
 void Matrix::printMatrix() {
-    std::cout<<"______________________________"<<std::endl;
+    std::cout<<""<<std::endl;
     for (unsigned row = 0; row < mat.size(); ++row) {
         for (unsigned col = 0; col < mat[row].size(); ++col) {
             if (col == mat[row].size() - 1) {
@@ -41,11 +41,13 @@ std::vector<std::vector<double> > Matrix::getMatrix() {
 }
 
 void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
+    /* TESTING PURPOSES
     if (rowA >= mat.size() || rowA < 0 ||
         rowB >= mat.size() || rowB < 0) {
             std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
             return;
     }
+    */
     for (unsigned i = 0; i < mat[rowA].size(); ++i) {
         double temp = mat[rowA][i];
         mat[rowA][i] = mat[rowB][i];
@@ -54,10 +56,12 @@ void Matrix::rowSwitch(unsigned rowA, unsigned rowB) {
 }
 
 void Matrix::rowScale(unsigned row, double scale) {
+    /* TESTING PURPOSES
     if ( row >= mat.size() || row < 0) {
         std::cout<<"Invalid operation. Please enter a valid row."<<std::endl;
         return;
     }
+    */
     for (int i = 0; i < mat[row].size(); ++i) {
         if (mat[row][i] != 0) {
             mat[row][i] = mat[row][i] * scale;
@@ -66,11 +70,13 @@ void Matrix::rowScale(unsigned row, double scale) {
 }
 
 void Matrix::rowAdd(unsigned rowDest, unsigned rowSource, double scale) {
+    /* TESTING PURPOSES
     if (rowDest >= mat.size() || rowDest < 0 ||
         rowSource >= mat.size() || rowSource < 0) {
             std::cout<<"Invalid operation. Please enter valid rows."<<std::endl;
             return;
     }
+    */
     for (unsigned i = 0; i < mat[rowDest].size(); ++i) {
         if (mat[rowSource][i] != 0) {
             mat[rowDest][i] += mat[rowSource][i] * scale;
@@ -130,7 +136,6 @@ void Matrix::findEchelon() {
 
 void Matrix::rref() {
     Matrix::findEchelon();
-    Matrix::printMatrix();
     for (unsigned col = 0; col < mat[0].size(); ++col) {
         int rowStart = 0;
         if (Matrix::zeroCol(col) == 0) {

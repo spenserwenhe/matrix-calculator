@@ -9,7 +9,7 @@ int main() {
     std::cin>>row>>col;
     Matrix newMat = Matrix(row, col);
     newMat.printMatrix();
-    newMat.findEchelon();
+    newMat.rref();
     newMat.printMatrix();
     return 0;
 }

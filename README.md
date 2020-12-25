@@ -1,3 +1,4 @@
 # Matrix Math Implementation
-## Row operations, echelon form, RREF, and more.
 Contributor: Spenser Fong
+## Overview
+A command-line program that allows users to find matrix echelon forms, RREFs, and more. It currently only supports finding echelon forms and RREFs.

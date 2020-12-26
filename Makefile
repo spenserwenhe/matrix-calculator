@@ -1,11 +1,12 @@
-output: main.o matrix.o
-	g++ main.o matrix.o -o main
+#Executable names:
+EXE =
+TEST = test main
 
-main.o: main.cpp
-	g++ -c main.cpp
+#Add all object files needed for compiling:
+EXE_OBJ = main.o tests.o
+OBJS = matrix.o
 
-matrix.o: matrix.cpp matrix.h
-	g++ -c matrix.cpp
+#Generated files
 
-clean:
-	rm *.o main
+#Use the cs225 makefile template:
+include cs225/make/cs225.mk

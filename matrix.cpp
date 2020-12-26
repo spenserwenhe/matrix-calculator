@@ -56,7 +56,7 @@ void Matrix::rowScale(unsigned row, double scale) {
         return;
     }
     */
-    for (int i = 0; i < mat[row].size(); ++i) {
+    for (unsigned i = 0; i < mat[row].size(); ++i) {
         if (mat[row][i] != 0) {
             mat[row][i] = mat[row][i] * scale;
         }
@@ -90,7 +90,7 @@ void Matrix::findEchelon() {
     if (Matrix::zeroMatCheck() == 1) {
         return;
     }
-    int rowCounter = 0;
+    unsigned rowCounter = 0;
     for (unsigned col = 0; col < mat[0].size(); ++col) {
         if (rowCounter >= mat.size()) {
             break;
@@ -100,7 +100,7 @@ void Matrix::findEchelon() {
             /*Swap the 1st row with a lower one so a leftmost nonzero entry
             is in the first row. */
             if (mat[rowCounter][col] == 0 && rowCounter < mat.size() - 1) {
-                for (int i = rowCounter + 1; i < mat.size(); ++i) {
+                for (unsigned i = rowCounter + 1; i < mat.size(); ++i) {
                     if (mat[i][col] != 0) {
                         Matrix::rowSwitch(rowCounter, i);
                         break;
@@ -112,7 +112,7 @@ void Matrix::findEchelon() {
             double scale1 = 1 / mat[rowCounter][col];
             Matrix::rowScale(rowCounter, scale1);
             if (rowCounter < mat.size() - 1) {
-                for (int i = rowCounter + 1; i < mat.size(); ++i) {
+                for (unsigned i = rowCounter + 1; i < mat.size(); ++i) {
                     if (mat[i][col] != 0) {
                         if (mat[i][col] == mat[rowCounter][col]) {
                             Matrix::rowAdd(i, rowCounter, -1);

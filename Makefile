@@ -1,9 +1,9 @@
 #Executable names:
 EXE =
-TEST = test main
+TEST = test
 
 #Add all object files needed for compiling:
-EXE_OBJ = main.o tests.o
+EXE_OBJ =
 OBJS = matrix.o
 
 #Generated files

@@ -1,6 +1,6 @@
 # Matrix Math Implementation
 Contributor: Spenser Fong
-## Overview
+## Overview (**PROJECT CURRENTLY ON HOLD DUE TO LIMITED TIME**)
 A command-line program that allows users to find matrix echelon forms, RREFs, and more. It currently only supports finding echelon forms and RREFs.
 
 REQUIRED FILES: matrix.h/cpp, main.cpp, Makefile
